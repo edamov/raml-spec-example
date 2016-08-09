@@ -1,0 +1,71 @@
+#%RAML 0.8
+title: Events API
+version: v1
+baseUri: http://api.events.loc
+
+schemas:
+  - event: !include schemas/schema-event.json
+
+/events:
+  description: Get a list of events
+  get:
+    queryParameters:
+      city:
+        displayName: City
+        type: string
+        description: From which city is event
+        example: Kharkiv
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/EventsCollection-example.json
+
+  post:
+    queryParameters:
+      access_token:
+        displayName: Access Token
+        type: string
+        description: Token giving you permission to make call
+        required: true
+    body:
+      application/json:
+        schema: event
+    responses:
+      201:
+
+  /{eventId}:
+    get:
+      responses:
+        200:
+          description: Get the event with `eventId = {eventId}`
+          body:
+            application/json:
+              example: !include examples/EventItem-example.json
+
+        404:
+          description: The event with `eventId = {eventId}` was not found
+          body:
+            application/json:
+              example: |
+                {"message": "Song not found"}
+    put:
+      queryParameters:
+          access_token:
+            displayName: Access Token
+            type: string
+            description: Token giving you permission to make call
+            required: true
+      body:
+        application/json:
+          schema: event
+      responses:
+        204:
+    delete:
+      queryParameters:
+        access_token:
+          displayName: Access Token
+          type: string
+          description: Token giving you permission to make call
+          required: true

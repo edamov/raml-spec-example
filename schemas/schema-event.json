@@ -1,0 +1,25 @@
+{
+  "type": "event",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": false
+    }
+  }
+}
